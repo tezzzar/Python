@@ -60,3 +60,10 @@ n = int(input("Enter the number of years the money will grow: "))
 p = f / (1 + r) ** n
 print("You will need to deposit this amount:", round(p, 2))
 print()
+# Завдання 10
+print("Завдання 10")
+a = 10
+b = 18
+c = (a ** 2 + b ** 2) ** 0.5
+print(c)
+print()
