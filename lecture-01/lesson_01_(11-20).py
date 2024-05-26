@@ -67,7 +67,8 @@ print("Завдання 19")
 s = 1000
 p = 8
 print(s + s * p / 100)
-print()# Завдання 20
+print()
+# Завдання 20
 print("Завдання 20")
 seconds = (int(input("Enter the number of seconds: ")))
 days = seconds // 86400
