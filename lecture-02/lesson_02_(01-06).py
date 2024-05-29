@@ -21,3 +21,19 @@ if sym(string):
 else:
     print("The entered string is not symmetrical")
 print()
+# Завдання 3
+print("Завдання 3")
+string = "amaama"
+def pal(string):
+    """Ця функція перевіряє чи є рядок паліндромом"""
+    str_length = len(string)
+    for i in range(str_length // 2):
+        if string[i] != string[str_length - i - 1]:
+            return False
+    return True
+if pal(string):
+    print("The entered string is palindrome")
+else:
+    print("The entered string is not palindrome")
+
+print()
