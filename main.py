@@ -163,12 +163,12 @@ print("My name {}, and I am {} years old".format(name, age))
 print(F"My name {name}, and I am {age} years old")
 
 print(chr(8364)) #€
-print(ord('€')) 
+print(ord('€'))
 
 print(name.capitalize())
 print(name.upper())
 print(name.title())
-print(name.lower()) # john doe 
+print(name.lower()) # john doe
 #  name.lower().istitle()
 print(name.lower().istitle())
 
