@@ -40,7 +40,6 @@ print()
 print("Завдання 4")
 str1 = "JhonDipPeta"
 str2 = "JaSonAy"
-
 def mid_chars(str1, str2):
     """Ця функція отримує три середні символи"""
     length1, length2 = len(str1), len(str2)
@@ -49,6 +48,34 @@ def mid_chars(str1, str2):
     mid_char1 = str1[mid1 - 1:mid1 + 2]
     mid_char2 = str2[mid2 - 1:mid2 + 2]
     return mid_char1, mid_char2
-
 print("Вихідні дані для Case 1, Case 2:", mid_chars(str1, str2))
+print()
+# Завдання 5
+print("Завдання 5")
+from decimal import *
+P = Decimal(input("Визначте основну суму: "))
+r = Decimal(input("Визначте річну відсоткову ставку: "))
+n = int(input("Визначте кількість разів нарахування відсотків на рік: "))
+t = int(input("Визначте кількість років, за які нараховуються відсотки: "))
+def complex_interest(P, r, n, t):
+    """Функція обчислює складні відсотки за заданою формулою A = P * (1 + (r / n)) ** (n * t)"""
+    dec = r / Decimal(100)
+    A = P * (1 + (dec / n)) ** (n * t)
+    return A
+getcontext().prec = 10
+result = complex_interest(P, r, n, t)
+print("Складні відсотки:", result)
+print()
+# Завдання 6
+print("Завдання 6")
+P = 500000
+r = 8
+n = 24
+def EMI(P, r, n):
+    """Ця функція реалізує метод зменшення балансу EMI за формулою: EMI = P * [( r * (1 + r)^n)) / ((1 + r)^n - 1)]"""
+    r_mon = r / (12 * 100)
+    emi = P * r_mon * ((1 + r_mon)**n) / (((1 + r_mon)**n) - 1)
+    return emi
+fix_pay_amount = EMI(P, r, n)
+print("EMI for 24 months:", fix_pay_amount)
 print()
