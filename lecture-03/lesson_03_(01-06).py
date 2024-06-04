@@ -33,3 +33,19 @@ def roll(lst, n):
 print(roll([1, 2, 3, 4, 5], 2))
 print(roll([1, 2, 3, 4, 5], -2) )
 print()
+# Завдання 6
+print("Завдання 6")
+import random
+def game():
+    random_number = random.randint(1, 100)
+    while True:
+        user_number = int(input("Введіть число від 1 до 100: "))
+        if user_number == random_number:
+            print("Ви вгадали номер !")
+            break
+        elif user_number > random_number:
+            print("Завелике число, спробуйте ще !")
+        else:
+            print("Замале число, спробуйте ще !")
+game()
+print()
