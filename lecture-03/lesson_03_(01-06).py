@@ -26,3 +26,10 @@ def includes_any(lst, values):
 print(includes_any([1, 2, 3, 4], [2, 9]))
 print(includes_any([1, 2, 3, 4], [8, 9]))
 print()
+# Завдання 5
+print("Завдання 5")
+def roll(lst, n):
+    return lst[-n:] + lst[:-n]
+print(roll([1, 2, 3, 4, 5], 2))
+print(roll([1, 2, 3, 4, 5], -2) )
+print()
