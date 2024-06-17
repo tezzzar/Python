@@ -16,33 +16,51 @@
 # Виведення меню:
 # 1. Виведення меню команд після кожної дії, щоб користувачі не забували про доступні опції.
 
+# Додатково:
+
+# 1. Використовуйте послідовні правила іменування для імен функцій і змінних (наприклад, snake_case):
+# Усі імена функцій та змінних приведені до формату snake_case.
+
+# 2. Переконайтеся, що імена та телефонні номери введені користувачем правильно, надішліть повідомлення користувачеві, якщо це не так:
+# Додана функція validate_phone_number, яка перевіряє формат номеру телефону.
+# Перевірка введення імен та телефонного номеру у функції add_contact з відповідними повідомленнями користувачу.
+
+# 3. Покращте підказки та повідомлення зворотнього зв’язку, щоб зробити роботу користувача більш інформативною:
+# Додані детальні повідомлення зворотного зв'язку у випадку помилок (наприклад, якщо номер телефону неправильний або контакт вже існує).
+# Повідомлення про успішне додавання, оновлення та видалення контактів.
+
+# 4. Переконайтеся, що код правильно обробляє сценарій, коли немає контактів:
+# Функція contact_list перевіряє наявність контактів і виводить відповідне повідомлення, якщо список контактів порожній.
+
+# 5. Додайте коментарі та рядки документів для кращої читабельності та обслуговування:
+# Додані коментарі до функцій і важливих частин коду для покращення читабельності та обслуговування.
 
 contacts = []
-
-contact = {"first_name": "john", "last_name": "doe", "phone_number": "380111234567"}
-
-contacts.append(contact)
 
 TITLE = "Your phone book"
 
 
 def hello():
+    """Вітання користувача"""
     print(f"Hi! It's me, {TITLE.upper()}")
 
 
 def bye():
+    """Прощання з користувачем"""
     print(f"Thanks for using {TITLE}")
 
 
 def make_your_choice():
+    """Запит вибору дії у користувача"""
     return (
-        input(f"\nPlease make your choice (l, a, u, r, h, or q) here>>> ")
+        input("\nPlease make your choice (l, a, u, r, h, or q) here>>> ")
         .strip()
         .lower()
     )
 
 
 def help_me():
+    """Виведення довідки про доступні команди"""
     print(
         """
     All that you can do:
@@ -57,6 +75,7 @@ def help_me():
 
 
 def contact_list():
+    """Виведення списку контактів"""
     if contacts:
         # Вивід контактів у вигляді таблиці
         print(f"{'First Name':<15} {'Last Name':<15} {'Phone Number':<15}")
@@ -70,7 +89,7 @@ def contact_list():
 
 
 def validate_phone_number(phone_number):
-    # Перевірка чи номер телефону відповідає формату
+    """Перевірка чи номер телефону відповідає формату 380XXXXXXXXX"""
     if (
         len(phone_number) != 12
         or not phone_number.isdigit()
@@ -83,7 +102,16 @@ def validate_phone_number(phone_number):
     return True
 
 
+def validate_name(name):
+    """Перевірка чи ім'я або прізвище складаються лише з букв і в нижньому регістрі"""
+    if not name.isalpha() or not name.islower():
+        print("Names and surnames must contain only letters and be in lowercase.")
+        return False
+    return True
+
+
 def add_contact():
+    """Додавання нового контакту"""
     first_name = input("Enter first name: ").strip().lower()
     last_name = input("Enter last name: ").strip().lower()
     phone_number = input("Enter phone number: ").strip()
@@ -91,6 +119,10 @@ def add_contact():
     # Перевірка на заповненість полів і формат номеру телефону
     if not first_name or not last_name or not phone_number:
         print("All fields are required. Please try again.")
+        return None
+
+    # Перевірка імені та прізвища
+    if not validate_name(first_name) or not validate_name(last_name):
         return None
 
     if not validate_phone_number(phone_number):
@@ -113,6 +145,7 @@ def add_contact():
 
 
 def update_contact(contact):
+    """Оновлення існуючого контакту"""
     old_phone_number = contact["phone_number"]
     old_first_name = contact["first_name"]
     old_last_name = contact["last_name"]
@@ -130,6 +163,10 @@ def update_contact(contact):
     )
     last_name = input(f"Edit last name: ({old_last_name}) => ").strip() or old_last_name
 
+    # Перевірка імені та прізвища
+    if not validate_name(first_name) or not validate_name(last_name):
+        return contact
+
     return {
         "first_name": first_name.lower(),
         "last_name": last_name.lower(),
@@ -138,6 +175,7 @@ def update_contact(contact):
 
 
 def remove_contact(contact):
+    """Видалення контакту"""
     index = contacts.index(contact)
     # Підтвердження видалення контакту
     confirm = (
@@ -149,6 +187,7 @@ def remove_contact(contact):
 
 
 def lookup_contact(name):
+    """Пошук контакту за ім'ям"""
     words = name.split()
     if len(words) == 2:
         first_name, last_name = words
@@ -158,20 +197,21 @@ def lookup_contact(name):
     else:
         return None
 
-    for d in contacts:
+    for contact in contacts:
         if (
-            d["first_name"] == first_name.lower()
-            and d["last_name"] == last_name.lower()
+            contact["first_name"] == first_name.lower()
+            and contact["last_name"] == last_name.lower()
         ):
-            return d
-        elif d["first_name"] == first_name.lower() and not last_name:
-            return d
+            return contact
+        elif contact["first_name"] == first_name.lower() and not last_name:
+            return contact
     return None
 
 
 def main():
+    """Головна функція програми"""
     hello()
-    help_me()  # Виводення меню після привітання
+    help_me()  # Виведення меню після привітання
 
     while True:
         choice = make_your_choice()
@@ -201,8 +241,11 @@ def main():
         elif choice == "q":
             bye()
             break
-        else:
+        elif choice == "h":
             help_me()
+        else:
+            print("Invalid choice. Please try again.")
+        help_me()  # Виведення меню після кожної дії
 
 
 main()
