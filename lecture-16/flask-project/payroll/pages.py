@@ -1,13 +1,21 @@
 from flask import Blueprint, render_template
 
-bp = Blueprint('pages', __name__)
+bp = Blueprint("pages", __name__)
 
-@bp.route('/')
+
+@bp.route("/")
 def home():
     return render_template("pages/home.html")
     # return "Home page."
 
-@bp.route('/about')
+
+@bp.route("/about")
 def about():
     return render_template("pages/about.html")
+    # return "About page."
+
+
+@bp.route("/register")
+def register():
+    return render_template("pages/register.html")
     # return "About page."
